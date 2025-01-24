@@ -1,69 +1,8 @@
-type Matrix = list[list[float]]
-
-def is_empty(matrix: Matrix) -> bool:
-    return len(matrix) == 0 or len(matrix[0]) == 0
-
-def mat_filled(rows: int, columns: int, val: int) -> Matrix:
-    return [[val] * columns for _ in range(rows)]
-
-
-def transpose(matrix: Matrix) -> Matrix:   
-    if is_empty(matrix): return matrix 
-
-    rows = len(matrix)
-    columns = len(matrix[0])
-    
-    res = mat_filled(columns, rows,  0)
-    for row in range(rows):
-        for column in range(columns):
-            res[column][row] = matrix[row][column]
-
-    return res
-
-def powers(lst: list, a: int, b: int) -> Matrix:
-    if len(lst) == 0: return [] 
-
-    exponents = range(a, b+1)
-    res = []
-    for row in range(len(lst)):
-        res.append([lst[row] ** exponent for exponent in exponents])
-    
-    return res
-
-def matmul(A: Matrix, B: Matrix) -> Matrix:
-    if (is_empty(A) and is_empty(B)): return []
-
-    rows = len(A)
-    columns = len(B[0])
-    C = mat_filled(rows,  columns, 0)
-    for i in range(rows):
-        for j in range(columns):
-            C[i][j] = sum([A[i][k] * B[k][j] for k in range(len(B))])
-    return C
-
-
-def invert(A: Matrix) -> Matrix:
-    """Only works for 2x2 matrices."""
-    a = A[0][0]
-    b = A[0][1]
-    c = A[1][0]
-    d = A[1][1]
-    det = a * d - b * c
-    return [[d/det, -b/det],
-            [-c/det, a/det]]
-
-
-def loadtxt(fileName) -> Matrix:
-    matrix: Matrix = []
-    with open(fileName, encoding="utf-8") as file:
-        for line in file.readlines():
-            row = list(map(float, line.split()))
-            matrix.append(row)
-            
-    return matrix
+from typing import Self
 
 
 class Matrix:
+    """A 2-dimensional mathematical matrix of floating-point numbers."""
     def __init__(self, rows: list[list[float]]):
         if (len(rows) != 0):
             rowSize = len(rows[0])
@@ -74,15 +13,17 @@ class Matrix:
 
 
     @staticmethod
-    def _filled_mat(rows: int, columns: int, val: int):
+    def _filled_mat(rows: int, columns: int, val: float) -> list[list[float]]:
         return [[val] * columns for _ in range(rows)]
     
     @classmethod
-    def filled(cls, rows: int, columns: int, val: int) -> Matrix:
-        return cls(cls._filled_mat())
+    def filled(cls, rows: int, columns: int, value: int) -> Self:
+        """Create a matrix with a fixed number of [rows] and [columns] by filling it with the given [value]."""
+        return cls(cls._filled_mat(rows, columns, value))
     
     @classmethod
-    def powers(cls, lst: list, a: int, b: int) -> Matrix:
+    def powers(cls, lst: list[float], a: int, b: int) -> Self:
+        """For each number in the original [lst] it creates one row by raising the number to each exponent between [a] and [b]."""
         if len(lst) == 0: return cls([])
 
         exponents = range(a, b+1)
@@ -93,7 +34,10 @@ class Matrix:
         return cls(res)
 
     @classmethod
-    def loadtxt(cls, fileName) -> Matrix:
+    def loadtxt(cls, fileName) -> Self:
+        """Load a matrix from a file. 
+        
+        Values should be separated by whitespace characters. A new line indicates a new row."""
         rows = []
         with open(fileName, encoding="utf-8") as file:
             for line in file.readlines():
@@ -105,10 +49,12 @@ class Matrix:
 
     @property
     def rows(self) -> list[list[float]]:
+        """The rows in this matrix."""
         return self._rows
     
     @property
     def columns(self) -> list[list[float]]:
+        """The columns in this matrix."""
         if self.is_empty(): return []
         return [[row[j]  for row in self.rows] for j in range(len(self.rows[0]))] 
 
@@ -127,21 +73,29 @@ class Matrix:
         """Whether this matrix is empty of elements."""
         return len(self.rows) == 0 or len(self.rows[0]) == 0
     
-    def transposed(self) -> Matrix:
+    def transposed(self) -> Self:
+        """Transpose this matrix and return the transposed matrix.
+
+        This does not modify the original matrix."""
         return Matrix(self.columns)
 
-    def inverted(self) -> Matrix:
-        """Only works for 2x2 matrices."""
+    def inverted(self) -> Self:
+        """Invert this matrix and return the inverted matrix.
+
+        This does not modify the original matrix.
+        
+        Currently only works for 2x2 matrices."""
         a = self.rows[0][0]
         b = self.rows[0][1]
         c = self.rows[1][0]
         d = self.rows[1][1]
         det = a * d - b * c
-        return [[d/det, -b/det],
-                [-c/det, a/det]]
+        return Matrix([[d/det, -b/det],
+                [-c/det, a/det]])
 
-    def matmul(self, other: Matrix) -> Matrix:
-        if (self.is_empty() and other.is_empty()): return []
+    def multiply(self, other: Self) -> Self:
+        """Multiply this matrix with [other] using matrix multiplication."""
+        if (self.is_empty() and other.is_empty()): return Matrix([])
 
         rows = len(self.rows)
         columns = len(other.rows[0])
@@ -150,6 +104,29 @@ class Matrix:
             for j in range(columns):
                 res[i][j] = sum([self.rows[i][k] * other.rows[k][j] for k in range(len(other.rows))])
         return Matrix(res)
+
+    def __matmul__(self, other: Self):
+        return self.multiply(other)
     
     def __str__(self):
         return str(self.rows)
+
+
+
+type MatrixRows = list[list[float]]
+
+def transpose(matrix: MatrixRows) -> MatrixRows: 
+    return Matrix(matrix).transposed().rows
+
+def powers(lst: list[float], a: int, b: int) -> MatrixRows:
+    return Matrix.powers(lst, a, b).rows
+
+def matmul(A: MatrixRows, B: MatrixRows) -> MatrixRows:
+    return (Matrix(A) @ Matrix(B)).rows
+
+def invert(A: MatrixRows) -> MatrixRows:
+    """Only works for 2x2 matrices."""
+    return Matrix(A).inverted().rows
+
+def loadtxt(fileName) -> MatrixRows:
+    return Matrix.loadtxt(fileName).rows
