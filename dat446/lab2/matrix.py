@@ -94,7 +94,7 @@ class Matrix:
         return Matrix([[d/det, -b/det],
                 [-c/det, a/det]])
 
-    def multiply(self, other: Self) -> Self:
+    def matmul(self, other: Self) -> Self:
         """Multiply this matrix with [other] using matrix multiplication."""
         if (self.is_empty() and other.is_empty()): return Matrix([])
 
@@ -107,7 +107,7 @@ class Matrix:
         return Matrix(res)
 
     def __matmul__(self, other: Self) -> Self:
-        return self.multiply(other)
+        return self.matmul(other)
     
     def __str__(self) -> str:
         return str(self.rows)
