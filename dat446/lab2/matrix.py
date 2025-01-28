@@ -69,6 +69,7 @@ class Matrix:
         if self.is_empty(): return 0
         return len(self.rows[0])
     
+    
     def is_empty(self) -> bool:
         """Whether this matrix is empty of elements."""
         return len(self.rows) == 0 or len(self.rows[0]) == 0
@@ -104,6 +105,7 @@ class Matrix:
             for j in range(columns):
                 res[i][j] = sum([self.rows[i][k] * other.rows[k][j] for k in range(len(other.rows))])
         return Matrix(res)
+
 
     def __matmul__(self, other: Self):
         return self.multiply(other)
