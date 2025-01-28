@@ -106,11 +106,10 @@ class Matrix:
                 res[i][j] = sum([self.rows[i][k] * other.rows[k][j] for k in range(len(other.rows))])
         return Matrix(res)
 
-
-    def __matmul__(self, other: Self):
+    def __matmul__(self, other: Self) -> Self:
         return self.multiply(other)
     
-    def __str__(self):
+    def __str__(self) -> str:
         return str(self.rows)
 
 

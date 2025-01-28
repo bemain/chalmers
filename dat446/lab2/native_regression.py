@@ -9,10 +9,9 @@ def main():
     Xpt = Xp.transposed()
 
     [[b],[m]] = ((Xpt @ Xp).inverted() @ (Xpt @ Yp)).rows
-    print(b, m)
-    # prediction = b + m * temperature
-    plt.plot(X,Y)
+    
     plt.plot(X,Y, "ro")
+    plt.plot(X,[b + m * x for x in X])
     plt.show()
 
 
