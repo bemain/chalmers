@@ -66,6 +66,18 @@ class GameGraphics:
 
             update(50)
 
+            # Check if we hit the other player
+            # We do this after every update instead of just when the projectile hits the ground.
+            # This requires us to measure the distance in 2 dimensions, but provides improved gameplay.
+            # Previously the projectile could pass through the player without detecting a hit, if it touched the ground outside it.
+            other = self.game.getOtherPlayer()
+            distance = other.projectile2DDistance(proj)
+            if distance == 0.0:
+                player.increaseScore()
+                self.updateScore(self.game.getCurrentPlayerNumber())
+                self.game.newRound()
+                break
+
         return proj
 
     def updateScore(self, playerNr: int):
@@ -90,12 +102,6 @@ class GameGraphics:
             player = self.game.getCurrentPlayer()
             other = self.game.getOtherPlayer()
             proj = self.fire(angle, vel)
-            distance = other.projectileDistance(proj)
-
-            if distance == 0.0:
-                player.increaseScore()
-                self.updateScore(self.game.getCurrentPlayerNumber())
-                self.game.newRound()
 
             self.game.nextPlayer()
 

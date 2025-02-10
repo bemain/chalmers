@@ -146,17 +146,26 @@ class Player:
         self.projectile = Projectile(180 - angle if self.isReversed else angle, velocity, self.__game.wind, self.getPosition()[0], self.getPosition()[1], -110, 110)
         return self.projectile
 
-    """ Gives the x-distance from this players cannon to a projectile. If the cannon and the projectile touch (assuming the projectile is on the ground and factoring in both cannon and projectile size) this method should return 0"""
+    """ Gives the x-distance from this player's cannon to a projectile. If the cannon and the projectile touch (assuming the projectile is on the ground and factoring in both cannon and projectile size) this method should return 0"""
     def projectileDistance(self: Self, proj: Projectile):
         diff = proj.getPosition()[0] - self.getPosition()[0]
         if abs(diff) < self.__game.getCannonSize() / 2 + self.__game.getBallSize():
             return 0
         return (1 if diff > 0 else -1) *( abs(diff) - self.__game.getCannonSize() / 2 - self.__game.getBallSize())
 
+    """ Gives the distance from this player's cannon to a projectile. This uses trignometry to calculate the distance in 2 dimensions.
+    First, the distance between the objects' centers is calculated as a vector. Then, the size of each object in the direction of the distance is measured and subtracted from the length of the initial distance.
+    If the cannon and the projectile touch, this method returns 0.
+    """
     def projectile2DDistance(self: Self, proj: Projectile):
-        centerDist = (self.getPosition()[0] - proj.getPosition()[0], self.getPosition()[1] - proj.getPosition()[1])
-        angleBetween = atan2(centerDist[1], centerDist[0])
-        boxSize = self.__game.getCannonSize() / 2 / max(abs(cos(angleBetween)), abs(sin(angleBetween)))
+        centerDist: tuple = (self.getPosition()[0] - proj.getPosition()[0], self.getPosition()[1] - proj.getPosition()[1])
+        angleBetween: float = atan2(centerDist[1], centerDist[0])
+        # The size of the cannon in the direction of the distance
+        boxSize: float = self.__game.getCannonSize() / 2 / max(abs(cos(angleBetween)), abs(sin(angleBetween)))
+        diff: float = sqrt(centerDist[0] ** 2 + centerDist[1] ** 2)
+        if diff < boxSize + self.__game.getBallSize():
+            return 0
+        return diff - boxSize - self.__game.getBallSize()
 
     """ The current score of this player """
     def getScore(self: Self):
