@@ -38,6 +38,22 @@ class GameGraphics:
         t.draw(self.win)
         return t
 
+    def explode(self):
+        player = self.game.getCurrentPlayer()
+        otherPlayer = self.game.getOtherPlayer()
+        pos = otherPlayer.getPosition()
+
+        radius = self.game.getBallSize()
+        while radius < 2 * self.game.getCannonSize():            
+            circle = Circle(Point(pos[0], pos[1]), radius)
+            circle.setFill(player.getColor())
+            circle.draw(self.win)
+
+            update(50)
+
+            circle.undraw()
+            radius += 0.25
+
     def fire(self, angle: float, vel: float) -> Projectile:
         player = self.game.getCurrentPlayer()
         playerNr = self.game.getCurrentPlayerNumber()
@@ -74,6 +90,7 @@ class GameGraphics:
             distance = other.projectile2DDistance(proj)
             if distance == 0.0:
                 player.increaseScore()
+                self.explode()
                 self.updateScore(self.game.getCurrentPlayerNumber())
                 self.game.newRound()
                 break
