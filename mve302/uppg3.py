@@ -14,8 +14,8 @@ zks = [Normal().icdf((k+1)/K) for k in range(K)]
 def simulate(N):
     xi = np.random.normal(my, sigma, N)
 
-    my_hat = sum(xi) / float(N)
-    sigma_hat = np.sqrt(sum((xi - my_hat)**2) / float(N))
+    my_hat = sum(xi) / N
+    sigma_hat = np.sqrt(sum((xi - my_hat)**2) / N)
 
     zi = (xi - my_hat) / sigma_hat
 

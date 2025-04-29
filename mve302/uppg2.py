@@ -8,7 +8,7 @@ K = 10
 xks = [Normal().icdf((k+1)/K) for k in range(K)]
 
 
-def simulate(my=0):
+def simulate(N, my=0):
     # Simulera normalfördelad data
     simulated = np.random.normal(my, 1, N)
 
@@ -31,14 +31,15 @@ def run(N=100, my=0, n=1000):
     
     k = 0
     for i in range(n):
-        Nk = simulate(my)
+        Nk = simulate(N, my)
         # Beräkna avvikelsen
         T = sum((Nk-Ek)**2 / Ek)
         if T >= c:
             k+=1
-    print(f"N(0, 1)-fördelning: T => c för {100*k/n}% av försöken (totalt {n} försök)")
+    print(f"N(0, 1)-fördelning: T => c för {100*k/n}% av försöken (totalt {n} försök)  då N={N}")
 
 
-run(1000, 0.0)
+run(1000, 0)
 run(200, 0.1)
 run(1000, 0.1)
+run(10000, 0.1)
