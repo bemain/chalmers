@@ -9,6 +9,7 @@ from scipy.stats import Normal
 
 K = 10
 xks = [Normal().icdf((k+1)/K) for k in range(K)]
+print(xks)
 
 
 def simulate(my=0):
@@ -34,7 +35,7 @@ def run(n=1000, N=100, my=0):
     
     k = 0
     for i in range(n):
-        Nks = simulate(0.1)
+        Nks = simulate(my)
         # Beräkna avvikelsen
         T = sum(map(lambda Nk: (Nk-Ek)**2 / Ek, Nks))
         if T >= c:
@@ -42,12 +43,12 @@ def run(n=1000, N=100, my=0):
     return k
 
 n = 1000
-N = 100
+N = 1000
 k = run(n, N, 0.0)
 print(f"N(0, 1)-fördelning: T => c för {100*k/n}% av försöken (totalt {n} försök)")
 
 n = 1000
-N = 100
+N = 200
 k = run(n, N, 0.1)
 print(f"N(0.1, 1)-fördelning: T => c för {100*k/n}% av försöken (totalt {n} försök) då N={N}")
 
@@ -57,5 +58,3 @@ k = run(n, N, 0.1)
 print(f"N(0.1, 1)-fördelning: T => c för {100*k/n}% av försöken (totalt {n} försök) då N={N}")
 
 
-
-#%% Tredje uppgiften
