@@ -25,10 +25,11 @@ def simulate(N, my=0):
 alpha = 0.05
 c = chi2.ppf(1 - alpha, df=K-1)
 
-def run(N=100, my=0, n=1000):
+def run(N, my=0, n=1000):
     # Bestäm väntevärde
     Ek = N / K  # = N (F(xk) - F(xk-1)) = N(k/K + (k-1)/K) = N/K
     
+    # Simulera n ggr
     k = 0
     for i in range(n):
         Nk = simulate(N, my)
