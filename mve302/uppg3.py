@@ -7,7 +7,7 @@ from scipy.stats import Normal, chisquare
 my = 100
 sigma = 10
 
-K = 100
+K = 10
 zk = [Normal().icdf((k+1)/K) for k in range(K)]
 
 
