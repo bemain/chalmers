@@ -1,66 +1,66 @@
-Studiepopulationen är alla förstföderskor (994 st), boende i Malmö, 
-som besökte någonav fyra mödravårdscentraler (täcker ca 90%) under 
+Studiepopulationen Ã¤r alla fÃ¶rstfÃ¶derskor (994 st), boende i MalmÃ¶, 
+som besÃ¶kte nÃ¥gonav fyra mÃ¶dravÃ¥rdscentraler (tÃ¤cker ca 90%) under 
 tiden september 1991 till september 1992. 872 personer valde att 
-delta. Missfall (17 st) och tvillingfödslar (12 st) ströks. Kvar 
-blev 747 personer som besvarade en enkät på MVC och en på BB efter 
-förlossningen.
+delta. Missfall (17 st) och tvillingfÃ¶dslar (12 st) strÃ¶ks. Kvar 
+blev 747 personer som besvarade en enkÃ¤t pÃ¥ MVC och en pÃ¥ BB efter 
+fÃ¶rlossningen.
 
-Man är intresserad av hur psykosocial stress påverkar risken för
-att föda ett för litet (undernärt) barn.
+Man Ã¤r intresserad av hur psykosocial stress pÃ¥verkar risken fÃ¶r
+att fÃ¶da ett fÃ¶r litet (undernÃ¤rt) barn.
 
-"För litet" (SGA = small for gestational age) ligger mer än 2 
-standardavvikelser under medelvikten för födelseveckan, olika för 
-pojkar och flickor. Man kan tyvärr inte skilja på barn som är små 
-pga undernäring och sådana som "skall" vara små, därför behöver man 
-korrigera för moderns längd: små mödrar borde få små barn.
+"FÃ¶r litet" (SGA = small for gestational age) ligger mer Ã¤n 2 
+standardavvikelser under medelvikten fÃ¶r fÃ¶delseveckan, olika fÃ¶r 
+pojkar och flickor. Man kan tyvÃ¤rr inte skilja pÃ¥ barn som Ã¤r smÃ¥ 
+pga undernÃ¤ring och sÃ¥dana som "skall" vara smÃ¥, dÃ¤rfÃ¶r behÃ¶ver man 
+korrigera fÃ¶r moderns lÃ¤ngd: smÃ¥ mÃ¶drar borde fÃ¥ smÃ¥ barn.
 
-Psykosocial stress kan definieras som brist på instrumentellt stöd 
-("har du någon du kan få hjälp av med praktiska saker?"), 
-emotionellt stöd ("har du någon du kan prata med"), social 
-förankring ("har du bra kontakt med släkten?") och/eller socialt 
-deltagande ("hur ofta går du på bio?").
+Psykosocial stress kan definieras som brist pÃ¥ instrumentellt stÃ¶d 
+("har du nÃ¥gon du kan fÃ¥ hjÃ¤lp av med praktiska saker?"), 
+emotionellt stÃ¶d ("har du nÃ¥gon du kan prata med"), social 
+fÃ¶rankring ("har du bra kontakt med slÃ¤kten?") och/eller socialt 
+deltagande ("hur ofta gÃ¥r du pÃ¥ bio?").
 
-Man vet också att rökning ökar risken och eventuellt också moderns 
-ålder (större risk i den högsta åldersgruppen). Dessutom kan man 
-kanske ta hänsyn till invandring, låg utbildning, alkoholkonsumtion,
-motionsvanor (tränar man mycket tar man all näring själv), om man 
-inte sammanbor med barnets far och om barnet är oplanerat.
+Man vet ocksÃ¥ att rÃ¶kning Ã¶kar risken och eventuellt ocksÃ¥ moderns 
+Ã¥lder (stÃ¶rre risk i den hÃ¶gsta Ã¥ldersgruppen). Dessutom kan man 
+kanske ta hÃ¤nsyn till invandring, lÃ¥g utbildning, alkoholkonsumtion,
+motionsvanor (trÃ¤nar man mycket tar man all nÃ¤ring sjÃ¤lv), om man 
+inte sammanbor med barnets far och om barnet Ã¤r oplanerat.
 
-Man kan också behöva BMI = (vikt i kg)/(längd i m)^2 som mått på om 
-moderns är välnärd (längd och vikt korrelerar för mycket för att tas 
+Man kan ocksÃ¥ behÃ¶va BMI = (vikt i kg)/(lÃ¤ngd i m)^2 som mÃ¥tt pÃ¥ om 
+moderns Ã¤r vÃ¤lnÃ¤rd (lÃ¤ngd och vikt korrelerar fÃ¶r mycket fÃ¶r att tas 
 med samtidigt).
 
-Filen  birth.dat  är en ascii-fil som innehåller 26 variabler, 747 
-individer. En punkt betyder saknat värde.
+Filen  birth.dat  Ã¤r en ascii-fil som innehÃ¥ller 26 variabler, 747 
+individer. En punkt betyder saknat vÃ¤rde.
 
 Variabler:
  1. graviditetsdag
- 2. kön                 1=pojke,        2=flicka
+ 2. kÃ¶n                 1=pojke,        2=flicka
  3. barnets vikt i gram
- 4. moderns ålder i år
+ 4. moderns Ã¥lder i Ã¥r
  5. SGA                 0=normalviktig, 1=underviktig
  6. kompikationer       0=inga,         1=komplikationer
  7. nationalitet        0=svensk,       1=ej svensk
-   (ej svensk = man själv och båda föräldrarna födda utomlands)
- 8. åldersgrupp         1=15-24 år, 2=25-29 år, 3=30-44 år
- 9. instrumentellt stöd 0=ja,           1=nej (brist)
-10. emotionellt stöd    0=ja,           1=nej (brist)
-11. social förankring   0=ja,           1=nej (brist)
+   (ej svensk = man sjÃ¤lv och bÃ¥da fÃ¶rÃ¤ldrarna fÃ¶dda utomlands)
+ 8. Ã¥ldersgrupp         1=15-24 Ã¥r, 2=25-29 Ã¥r, 3=30-44 Ã¥r
+ 9. instrumentellt stÃ¶d 0=ja,           1=nej (brist)
+10. emotionellt stÃ¶d    0=ja,           1=nej (brist)
+11. social fÃ¶rankring   0=ja,           1=nej (brist)
 12. socialt deltagande  0=ja,           1=nej (brist)
-13. barnets längd i cm
-14. barnets huvudomfång i cm
+13. barnets lÃ¤ngd i cm
+14. barnets huvudomfÃ¥ng i cm
 15. moderns vikt i kg
-16. moderns längd i cm
-17. utbildning          1=>12 år, 2=10-12 år, 3=<9år
+16. moderns lÃ¤ngd i cm
+17. utbildning          1=>12 Ã¥r, 2=10-12 Ã¥r, 3=<9 Ã¥r
 18. sambo med fadern    1=ja,           2=nej
 19. planerat barn       1=ja,           2=nej
-20. rökvanor            1=icke-rökare, 2=slutat, 3=röker
-21. passiv rökning      0=nej,          1=ja
+20. rÃ¶kvanor            1=icke-rÃ¶kare, 2=slutat, 3=rÃ¶ker
+21. passiv rÃ¶kning      0=nej,          1=ja
 22. kort moder          0=normal,       1=kort
-23. lätt moder          0=normal,       1=lätt
-24. rökexponering       1=ingen rök, 2=passiv rök, 3=egen rök
-25. motion              1=låg-medel,    2=hög
+23. lÃ¤tt moder          0=normal,       1=lÃ¤tt
+24. rÃ¶kexponering       1=ingen rÃ¶k, 2=passiv rÃ¶k, 3=egen rÃ¶k
+25. motion              1=lÃ¥g-medel,    2=hÃ¶g
 26. alkohol             0=absolutist, 1=slutat pga gravid, 2=dricker
 
 
-Datamaterialet kommer ifrån Anna Lindgren, anna@maths.lth.se.
+Datamaterialet kommer ifrï¿½n Anna Lindgren, anna@maths.lth.se.
