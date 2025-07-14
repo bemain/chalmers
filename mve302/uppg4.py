@@ -8,7 +8,7 @@ data = np.genfromtxt('birth.dat')
 vikt = data[:,2]
 m_vikt = data[:,14]
 m_langd = data[:,15]
-aldersgrupp = data[:,17]
+aldersgrupp = data[:,7]
 rokvanor = data[:,19]
 rokexponering = data[:,23]
 alkohol = data[:,25]
@@ -33,12 +33,10 @@ print(len(vikt_clean))
 
 
 
-[counts, bins] = np.histogram(vikt_clean, 50)
+[counts, bins] = np.histogram(vikt_clean, 32)
 plt.hist(bins[:-1], bins, weights=counts)
 
 plt.xlabel("Födelsevikt / Moderns vikt [g]")
 plt.ylabel("Antalet observationer")
 
 plt.show()
-
-# %%
